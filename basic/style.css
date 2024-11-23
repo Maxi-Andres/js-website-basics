@@ -1,0 +1,49 @@
+body {
+    font-family: Verdana;
+}
+
+/* Counter program ==================================================================== */
+
+#countLabel{
+    display: block;
+    text-align: center;
+    font-size: 5em;
+}
+#counterBtnContainer{
+    text-align: center;
+}
+.counterbtn{
+    padding: 10px 20px;
+    font-size: 1.5em;
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+.counterbtn:hover{
+    background-color: rgb(109, 115, 226);
+}
+
+/* randomNum generator ==================================================================== */
+
+#randomNumGenerator{
+    text-align: center;
+}
+#randomNumBtn{
+    padding: 8px 18px;
+    font-size: 1.5em;
+    color: white;
+    background-color: rgb(210, 51, 200);
+    border-radius: 10px;
+    cursor: pointer;
+}
+#randomNum{
+    font-size: 1.5em;
+}
+
+/* cheked property ==================================================================== */
+
+#cardSubmit{
+    font-size: 1em;
+}

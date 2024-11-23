@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- <h1 id="myH1"></h1> 
+    <p id="myP"></p>
+    <p id="p1"></p> -->
+
+    <h1 id="myH1">Welcome</h1>
+
+    <label>Username: </label>
+    <input id="myText">
+    <button id="mySubmit">submit</button>
+
+    <br>    
+    <label>radius: </label>
+    <input id="radius">
+    <button id="calcRadius">calcCircunference</button> <p id="resulCircunferende"></p>
+
+
+    <!-- Counter program ==================================================================== -->
+    <label id="countLabel">0</label>
+    <br>
+    <div id="counterBtnContainer">
+        <button id="decreaseBtn" class="counterbtn">decrease</button>
+        <button id="resetBtn" class="counterbtn">reset</button>
+        <button id="increaseBtn" class="counterbtn">increase</button>
+    </div>
+
+    <!-- randomNum generator ==================================================================== -->
+    <br>
+    <div id="randomNumGenerator">
+        <button id="randomNumBtn">Roll</button> <br>
+        <label id="randomNum"></label>
+    </div>
+
+    <!-- cheked property ==================================================================== -->
+    <br>
+    <input type="checkbox" id="checkboxProperty">
+    <label for="checkboxProperty">subscribe</label>
+    <br>
+    
+    <input type="radio" id="visaBtn" name="card">
+    <label for="visaBtn">Visa</label>
+    <input type="radio" id="mastedCardBtn" name="card">
+    <label for="mastedCardBtn">MastedCard</label>
+    <input type="radio" id="payPalBtn" name="card">
+    <label for="payPalBtn">PayPal</label>
+
+    <button type="submit" id="cardSubmit">submit</button>
+
+    <p id="subCardResult"></p>
+    <p id="paymentResult"></p>
+
+
+    <script src="index.js"></script> <!-- Esto siempre ponelo abajo de todo asi si hay un error porlomenos se renderiza -->
+</body>
+</html>
