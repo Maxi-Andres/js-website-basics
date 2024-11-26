@@ -38,10 +38,12 @@ function update(){
     const currentTime = Date.now();
     elapsedTime = currentTime - startTime;
 
-    let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-    let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);
+    // Es mejor hacer asi y no con if porque este puede tardar distintas cantidades de tiempo
+    let hours = Math.floor(elapsedTime / (1000 * 60 * 60)); 
+    let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);    // %60, es útil para limitar un valor a un rango de 0 a 59
     let seconds = Math.floor(elapsedTime / 1000 % 60);
     let miliseconds = Math.floor(elapsedTime % 1000 / 10); // dividido 10 porque solo se usan 2 dijitos de milisegundos
+    // floor a todos asi me dan numeros redondos
 
     hours = String(hours).padStart(2, "0"); // esto se lo agrego para que siempre se le agregue al comienzo un 0
     minutes = String(minutes).padStart(2, "0");
