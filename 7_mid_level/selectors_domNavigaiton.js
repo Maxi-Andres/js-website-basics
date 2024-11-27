@@ -33,10 +33,9 @@ const element = document.querySelector(".fruits");
 element.style.backgroundColor = "green";
 
 const cosa = document.querySelectorAll(".peep");
-cosa[1].style.backgroundColor = "orange"; //! se tiene que usar indice si o si
+cosa[1].style.backgroundColor = "orange"; //! se tiene que usar indice si o si podes usar un for y listo
 
-// DOM Navigation = The process of navigating through the structure of an HTML document using JavaScript
-
+// DOM Navigation =  The process of navigating through the structure of an HTML document using JavaScript
 // .firstElementChild
 // .lastElementChild
 // .nextElementSibling
@@ -44,7 +43,28 @@ cosa[1].style.backgroundColor = "orange"; //! se tiene que usar indice si o si
 // .parentElement
 // .children
 
+// Seleccionamos el contenedor principal
+const container = document.getElementById('container');
 
+// .firstElementChild: primer hijo del contenedor
+const primerHijo = container.firstElementChild;
+primerHijo.textContent = "primer hijo del contenedor";
 
+// .lastElementChild: último hijo del contenedor
+const ultimoHijo = container.lastElementChild;
+ultimoHijo.textContent = "ultimo hijo del contenedor";
 
+// .nextElementSibling: siguiente hermano del primer hijo
+const siguienteHermano = primerHijo.nextElementSibling;
+siguienteHermano.textContent = "suguiente hermano"; // Primer párrafo
 
+// .parentElement: obtener el padre del primer hijo
+const padre = primerHijo.parentElement;
+console.log('Padre del encabezado:', padre.id); // container
+
+// .children: lista de todos los hijos directos del contenedor
+const hijos = container.children;
+console.log('Hijos del contenedor:');
+for (let hijo of hijos) {
+console.log(hijo.textContent);
+}
