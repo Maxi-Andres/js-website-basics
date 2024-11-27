@@ -1,0 +1,18 @@
+body{
+    margin: 0;
+}
+
+#myBox{
+    background-color: lightgreen;
+    width: 270px;
+    height: 270px;
+    font-size: 4rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;;
+    border: 2px solid;
+    border-radius: 15px;
+    position: relative;
+}
