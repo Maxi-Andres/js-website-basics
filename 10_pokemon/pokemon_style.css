@@ -8,8 +8,9 @@ body {
     margin: 0;
 }
 
-div img {
-    width: 150px;
+img {
+    margin-top: 15px;
+    width: 200px;
     border: 2px solid;
 }
 
