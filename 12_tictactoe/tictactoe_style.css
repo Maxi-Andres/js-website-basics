@@ -22,21 +22,30 @@
     height: 100px;
     position: absolute;
 
-    visibility: hidden
+    visibility: hidden;
 }
 
-.cells{
-    border: 2px solid black;
+.choiceVisible{
     width: 100px;
     height: 100px;
     position: absolute;
+
+    visibility: visible;
+}
+
+.cells{
+    /* border: 2px solid black; */  /* Esto lo puse para ver nada mas */
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    cursor: pointer;
 }
 
 #cell_1{
     top: 50px;
     left: 40px;
 }
-#cell_1:active #img_1{
+#cell_1:hover #img_1{
     /* display: block; */
     visibility: visible;
     width: 100px;
@@ -47,7 +56,7 @@
     top: 50px;
     left: 180px;
 }
-#cell_2:active #img_2{
+#cell_2:hover #img_2{
     /* display: block; */
     visibility: visible;
     width: 100px;
@@ -58,7 +67,73 @@
     top: 50px;
     left: 320px;
 }
-#cell_3:active #img_3{
+#cell_3:hover #img_3{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_4{
+    top: 190px;
+    left: 40px;
+}
+#cell_4:hover #img_4{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_5{
+    top: 190px;
+    left: 180px;
+}
+#cell_5:hover #img_5{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_6{
+    top: 190px;
+    left: 320px;
+}
+#cell_6:hover #img_6{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_7{
+    top: 330px;
+    left: 40px;
+}
+#cell_7:hover #img_7{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_8{
+    top: 330px;
+    left: 180px;
+}
+#cell_8:hover #img_8{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_9{
+    top: 330px;
+    left: 320px;
+}
+#cell_9:hover #img_9{
     /* display: block; */
     visibility: visible;
     width: 100px;
