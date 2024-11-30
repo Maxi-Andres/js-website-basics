@@ -41,6 +41,16 @@
     cursor: pointer;
 }
 
+#playersPoints h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+}
+
 #cell_1{
     top: 50px;
     left: 40px;

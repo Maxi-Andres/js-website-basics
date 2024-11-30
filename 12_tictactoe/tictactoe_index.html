@@ -8,45 +8,52 @@
 </head>
 <body>
 
-
     <div id="tictactoeContainer">
+
         <img src="tictactoe.jpg">
 
         <div id="cell_1" class="cells">
-            <img class="choice" id="img_1" onclick="visibility(cell_1, img_1)">  <!-- le saco el src asi no se ve el dibujito de imagen chica -->
+            <img class="choice" id="img_1" onclick="visibility(cell_1, img_1, 1)">  <!-- le saco el src asi no se ve el dibujito de imagen chica -->
         </div>
 
         <div id="cell_2" class="cells">
-            <img class="choice" id="img_2" onclick="visibility(cell_2, img_2)">
+            <img class="choice" id="img_2" onclick="visibility(cell_2, img_2, 2)">
         </div>
 
         <div id="cell_3" class="cells">
-            <img class="choice" id="img_3" onclick="visibility(cell_3, img_3)">
+            <img class="choice" id="img_3" onclick="visibility(cell_3, img_3, 3)">
         </div>
 
         <div id="cell_4" class="cells">
-            <img class="choice" id="img_4" onclick="visibility(cell_4, img_4)">
+            <img class="choice" id="img_4" onclick="visibility(cell_4, img_4, 4)">
         </div>
 
         <div id="cell_5" class="cells">
-            <img class="choice" id="img_5" onclick="visibility(cell_5, img_5)">
+            <img class="choice" id="img_5" onclick="visibility(cell_5, img_5, 5)">
         </div>
 
         <div id="cell_6" class="cells">
-            <img class="choice" id="img_6" onclick="visibility(cell_6, img_6)">
+            <img class="choice" id="img_6" onclick="visibility(cell_6, img_6, 6)">
         </div>
 
         <div id="cell_7" class="cells">
-            <img class="choice" id="img_7" onclick="visibility(cell_7, img_7)">
+            <img class="choice" id="img_7" onclick="visibility(cell_7, img_7, 7)">
         </div>
 
         <div id="cell_8" class="cells">
-            <img class="choice" id="img_8" onclick="visibility(cell_8, img_8)">
+            <img class="choice" id="img_8" onclick="visibility(cell_8, img_8, 8)">
         </div>
 
         <div id="cell_9" class="cells">
-            <img class="choice" id="img_9" onclick="visibility(cell_9, img_9)">
+            <img class="choice" id="img_9" onclick="visibility(cell_9, img_9, 9)">
         </div>
+
+        <div id="playersPoints">
+            <h3 id="X">Player X:</h3>
+            <h3 id="O">Player O:</h3>
+        </div>
+
+        <h1 id="winner"></h1>
 
     </div>
 
