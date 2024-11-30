@@ -1,0 +1,66 @@
+#tictactoeContainer{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; */
+    width: 200px;
+    height: 200px;
+    /* background-color: blue; */
+    position: relative;
+    top: 140px;
+    left: 200px;
+}
+
+.choice{ /** estas son las imagenes */
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100px;
+    background-color: red; */
+    width: 100px;
+    height: 100px;
+    position: absolute;
+
+    visibility: hidden
+}
+
+.cells{
+    border: 2px solid black;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+#cell_1{
+    top: 50px;
+    left: 40px;
+}
+#cell_1:active #img_1{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_2{
+    top: 50px;
+    left: 180px;
+}
+#cell_2:active #img_2{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
+
+#cell_3{
+    top: 50px;
+    left: 320px;
+}
+#cell_3:active #img_3{
+    /* display: block; */
+    visibility: visible;
+    width: 100px;
+    height: 100px;
+}
