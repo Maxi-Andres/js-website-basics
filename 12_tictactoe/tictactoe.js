@@ -20,33 +20,15 @@ function visibility(cell, img, num){
     const playerTurn = counter % 2 ? 1 : 2 ;
 
     switch(num){
-        case 1:
-            battleField[0] = playerTurn;
-            break;
-        case 2:
-            battleField[1] = playerTurn;
-            break;
-        case 3:
-            battleField[2] = playerTurn;
-            break;
-        case 4:
-            battleField[3] = playerTurn;
-            break;
-        case 5:
-            battleField[4] = playerTurn;
-            break;
-        case 6:
-            battleField[5] = playerTurn;
-            break;
-        case 7:
-            battleField[6] = playerTurn;
-            break;
-        case 8:
-            battleField[7] = playerTurn;
-            break;
-        case 9:
-            battleField[8] = playerTurn;
-            break;
+        case 1: battleField[0] = playerTurn; break; // se puede poner asi el switch para que sea mas rapido de ver
+        case 2: battleField[1] = playerTurn; break;
+        case 3: battleField[2] = playerTurn; break;
+        case 4: battleField[3] = playerTurn; break;
+        case 5: battleField[4] = playerTurn; break;
+        case 6: battleField[5] = playerTurn; break;
+        case 7: battleField[6] = playerTurn; break;
+        case 8: battleField[7] = playerTurn; break;
+        case 9: battleField[8] = playerTurn; break;
     }
 
     cell.innerHTML = `<img class="choiceVisible" id="${img}" src="${player}.jpg">`;
@@ -54,6 +36,9 @@ function visibility(cell, img, num){
     if(checkWinner(playerTurn)){ // Con esto le saque el if horrible y me ahorre otro else igual
         h1.textContent = `Player ${player} Wins!`;
         updateScore(player);
+        resetBoardAfterDelay();
+    } else if (battleField.every( cell => cell != 0)) { // Comprobación de empate
+        h1.textContent = "It's a Draw!";
         resetBoardAfterDelay();
     }
 
