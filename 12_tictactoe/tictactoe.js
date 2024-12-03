@@ -37,7 +37,7 @@ function visibility(cell, img, num){
         h1.textContent = `Player ${player} Wins!`;
         updateScore(player);
         resetBoardAfterDelay();
-    } else if (battleField.every( cell => cell != 0)) { // Comprobación de empate
+    } else if (battleField.every( cell => cell != 0)) { // Comprobacion de empate
         h1.textContent = "It's a Draw!";
         resetBoardAfterDelay();
     }

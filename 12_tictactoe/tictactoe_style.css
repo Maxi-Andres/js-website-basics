@@ -1,27 +1,22 @@
 #tictactoeContainer{
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; */
-    width: 200px;
+    /* width: 200px;
     height: 200px;
-    /* background-color: blue; */
     position: relative;
     top: 140px;
-    left: 200px;
+    left: 200px; */
+
+    width: 400px; 
+    height: 500px; 
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%);
 }
 
 .choice{ /** estas son las imagenes */
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    height: 100px;
-    background-color: red; */
     width: 100px;
     height: 100px;
     position: absolute;
-
     visibility: hidden;
 }
 
@@ -29,7 +24,6 @@
     width: 100px;
     height: 100px;
     position: absolute;
-
     visibility: visible;
 }
 
@@ -41,14 +35,25 @@
     cursor: pointer;
 }
 
-#playersPoints h3{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
+#playersPoints {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-h1{
+#playersPoints h3{
+    display: inline-block;
+    margin: 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+#winner {
+    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3rem;
+    color: green;
+    margin-top: 20px;
 }
 
 #cell_1{
