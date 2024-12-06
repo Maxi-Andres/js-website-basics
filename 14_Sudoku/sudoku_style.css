@@ -1,14 +1,21 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    background-color: #f8f9fa; /* Fondo suave */
+    color: #333; /* Texto oscuro */
 }
 
 hr{
     width: 500px;
+    border-top: 2px solid #ccc;
+    margin: 20px auto;
 }
 
 #errors{
     color: coral;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 #board{
@@ -18,6 +25,10 @@ hr{
     margin: auto;
     display: flex;
     flex-wrap: wrap;
+
+    border: 1px solid #333; /* Marco del tablero */
+    background-color: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .tile{
@@ -26,15 +37,29 @@ hr{
     border: 1px solid lightgray;
 
     /* Text */
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease;
+}
+.tile:hover{
+    background-color: #e9ecef; /* Color de hover */
+}
+.tile-start{
+    background-color: #f8f9fa;;
+}
+
+.horizontal-line{
+    border-bottom: 1px solid black;
+}
+.vertical-line{
+    border-right: 1px solid black;
 }
 
 #digits{
-    width: 450px;
+    width: 486px; /* 450 + (4x9) asi entran los number en el centro*/
     height: 50px;
 
     margin: 0 auto;
@@ -43,39 +68,30 @@ hr{
 }
 
 .number{
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border: 1px solid black;
     margin: 2px;
+    border-radius: 2px;
+    background-color: white;
 
     /* Text */
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
-
-/* Esto lo agrego yo */
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .number:hover{
-    /* Esto lo agrego yo */
-
-    background-color: hsl(0, 0%, 75%);
+    background-color: hsl(210, 100%, 70%); /* Azul más vibrante */
+    color: white;
+    transform: scale(1.1); /* Animación de zoom */
 }
 
 .number-selected {
-    background-color: hsl(0, 0%, 50%);
-}
-
-.tile-start {
-    background-color: whitesmoke;
-}
-
-.horizontal-line{
-    border-bottom: 1px solid black;
-}
-.vertical-line{
-    border-right: 1px solid black;
+    background-color: hsl(210, 100%, 50%); /* Azul aún más intenso */
+    color: white;
 }

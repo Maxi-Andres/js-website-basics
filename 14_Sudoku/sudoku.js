@@ -93,7 +93,7 @@ function selectTile(){
             this.innerText = numSelected.id;
         } else {
             errors++;
-            document.getElementById("errors").innerText = errors;
+            document.getElementById("errors").innerText = "Mistakes: " + errors;
         }
     }
 }
