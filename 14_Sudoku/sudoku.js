@@ -46,8 +46,8 @@ window.onload = function(){
 function iniciarTemporizador() {
     temporizador = setInterval(() => {
         tiempo++;
-        const minutos = Math.floor(tiempo / 60);
-        const segundos = tiempo % 60;
+        const minutos = Math.floor(tiempo / 60); //floor para que sea entero si o si
+        const segundos = tiempo % 60; // asi segundos esta entre 0-59
         document.getElementById("timer").innerText = `Time: ${minutos}:${segundos.toString().padStart(2, "0")}`;
     }, 1000);
 }
@@ -86,7 +86,6 @@ function setGame(){
             document.getElementById("board").append(tile);
         }
     }
-
 }
 
 function selectNumber(){
@@ -107,11 +106,38 @@ function selectTile(){
         this.innerText = numSelected.id;
 
         if(solution[x][y] != numSelected.id){
-            this.style.color = "coral"
+            this.style.color = "#ff6b6b" // Marca el error en rojo
             errors++;
             document.getElementById("errors").innerText = "Mistakes: " + errors;
         } else {
             this.style.color = "#333"; // Esto tiene que estar aca, asi cuando corrije el error cambia de color
+            checkCompletedNumber();
+        }
+    }
+}
+
+//! Esta pija no anda
+
+function checkCompletedNumber() {
+    for (let num = 1; num <= 9; num++) { // Itera sobre los números del 1 al 9
+        let count = 0; // Contador para el número actual
+        for (let fila = 0; fila < 9; fila++) {
+            for (let col = 0; col < 9; col++) {
+                const tile = document.getElementById(`${fila}-${col}`);
+                if (tile.innerText === num.toString() && tile.style.color != "#ff6b6b") {
+                    count++; // Cuenta cuántas veces aparece el número en el tablero
+                }
+            }
+        }
+
+        // Si se encuentra 9 veces en el tablero, considera el número completado
+        if (count === 9) {
+            const number = document.getElementById(num.toString());
+            if (!number.classList.contains("number-completed")) {
+                number.classList.add("number-completed"); // Marca como completado
+                number.removeEventListener("click", selectNumber); // Desactiva selección
+                availableNums--; // Reduce el número de disponibles
+            }
         }
     }
 }
