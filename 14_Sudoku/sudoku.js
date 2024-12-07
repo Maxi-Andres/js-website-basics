@@ -1,9 +1,10 @@
+//// Que te deje poner los numeros incluso si estan mal pero que te los ponga en rojo
 // ver como hacer un generador de sudoku y tenga dificultaddes
 // que con un boton se pueda rsolver
 // que con otro boton te de una pista
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
-// que te deje poner los numeros incluso si estan mal pero que te los ponga en rojo
 // que tenga un contador de tiempo 
+// que cuando lo temines te ponga que ganaste o algo asi
 
 var numSelected = null;
 var tileSelected = null;
@@ -34,8 +35,21 @@ var solution = [
     "812945763",
 ];
 
+let tiempo = 0;
+let temporizador;
+
 window.onload = function(){
     setGame();
+    iniciarTemporizador();
+}
+
+function iniciarTemporizador() {
+    temporizador = setInterval(() => {
+        tiempo++;
+        const minutos = Math.floor(tiempo / 60);
+        const segundos = tiempo % 60;
+        document.getElementById("timer").innerText = `Time: ${minutos}:${segundos.toString().padStart(2, "0")}`;
+    }, 1000);
 }
 
 function setGame(){
@@ -72,6 +86,7 @@ function setGame(){
             document.getElementById("board").append(tile);
         }
     }
+
 }
 
 function selectNumber(){
@@ -83,17 +98,20 @@ function selectNumber(){
 }
 
 function selectTile(){
-    if(numSelected && this.innerText == ""){ // asi solo se puede poner una vez sola un numero en un tile
+    if(numSelected && !this.classList.contains("tile-start")){ // && this.innerText == "" asi solo se puede poner una vez sola un numero en un tile
 
         let cords = this.id.split("-");
         let x = parseInt(cords[0]);
         let y = parseInt(cords[1]);
 
-        if(solution[x][y] == numSelected.id){
-            this.innerText = numSelected.id;
-        } else {
+        this.innerText = numSelected.id;
+
+        if(solution[x][y] != numSelected.id){
+            this.style.color = "coral"
             errors++;
             document.getElementById("errors").innerText = "Mistakes: " + errors;
+        } else {
+            this.style.color = "#333"; // Esto tiene que estar aca, asi cuando corrije el error cambia de color
         }
     }
 }

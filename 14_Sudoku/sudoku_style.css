@@ -11,11 +11,48 @@ hr{
     margin: 20px auto;
 }
 
-#errors{
-    color: coral;
+button {
+    background-color: #007bff; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cambiar el cursor cuando se pasa sobre el botón */
+    transition: background-color 0.3s, transform 0.2s; /* Transición para el color y animación */
+}
+
+button:hover {
+    background-color: #0056b3; /* Color de fondo cuando el ratón pasa por encima */
+    transform: scale(1.05); /* Efecto de aumentar el tamaño ligeramente */
+}
+
+button:focus { /* Cuando tocas tab en vez de ponerse el borde negro le pone el shadow */
+    outline: none; /* Elimina el contorno predeterminado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.7); /* Añadir sombra de enfoque */
+}
+
+button:active {
+    background-color: #004085; /* Color de fondo cuando se hace clic */
+    transform: scale(1); /* Vuelve al tamaño original */
+}
+
+h2{
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+#errors{
+    color: coral;
+}
+
+#controls{
+    width: 450px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px auto; /* Establece un margen de 10px arriba y abajo, y centra el elemento horizontalmente */
 }
 
 #board{
@@ -23,8 +60,8 @@ hr{
     height: 450px;
 
     margin: auto;
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; /* Convierte el contenedor en un contenedor flexible, permitiendo organizar los elementos hijos (hijos flexibles) según las reglas del modelo Flexbox. */
+    flex-wrap: wrap; /* Permite que los elementos hijos del contenedor flexible se ajusten en varias filas si no caben en una sola línea. */
 
     border: 1px solid #333; /* Marco del tablero */
     background-color: #fff;
@@ -40,15 +77,15 @@ hr{
     font-size: 25px;
     font-weight: bold;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centra los elementos hijos del contenedor horizontalmente dentro del contenedor flexible. */
+    align-items: center; /* Centra los elementos hijos del contenedor verticalmente dentro del contenedor flexible. */
     transition: background-color 0.3s ease;
 }
 .tile:hover{
     background-color: #e9ecef; /* Color de hover */
 }
 .tile-start{
-    background-color: #f8f9fa;;
+    background-color: #f8f9fa;
 }
 
 .horizontal-line{
