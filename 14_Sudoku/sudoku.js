@@ -1,10 +1,10 @@
 //// Que te deje poner los numeros incluso si estan mal pero que te los ponga en rojo
-// ver como hacer un generador de sudoku y tenga dificultaddes
-// que con un boton se pueda rsolver
-// que con otro boton te de una pista
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
-// que tenga un contador de tiempo 
+// ver como hacer un generador de sudoku y tenga dificultaddes
 // que cuando lo temines te ponga que ganaste o algo asi
+// que con otro boton te de una pista
+// que con un boton se pueda resolver (mejorar lo de los colores y que si alguien toca solve y despues pone numeros y toca solve otravez no se resuelve)
+// que tenga un contador de tiempo 
 
 var numSelected = null;
 var tileSelected = null;
@@ -48,6 +48,18 @@ var board = [
     [6, 7, 0, 8, 3, 0, 0, 0, 0],
     [8, 1, 0, 0, 4, 5, 0, 0, 0]
 ];
+
+// var solution = [
+//     [0, 0, 7, 4, 9, 1, 6, 0, 5],
+//     [2, 0, 0, 0, 6, 0, 3, 0, 9],
+//     [0, 0, 0, 0, 0, 7, 0, 1, 0],
+//     [0, 5, 8, 6, 0, 0, 0, 0, 4],
+//     [0, 0, 3, 0, 0, 0, 0, 9, 0],
+//     [0, 0, 6, 2, 0, 0, 1, 8, 7],
+//     [9, 0, 4, 0, 7, 0, 0, 0, 2],
+//     [6, 7, 0, 8, 3, 0, 0, 0, 0],
+//     [8, 1, 0, 0, 4, 5, 0, 0, 0]
+// ];
 
 // var solution = [
 //     [3, 8, 7, 4, 9, 1, 6, 2, 5],
@@ -155,7 +167,6 @@ function selectTile(){
 }
 
 function isValidMove(value, row, col){
-
     // board[y][x]
     for(let c = 0; c < 9 ; c++){
         if (board[row][c] == value){ // recorro las columnas
@@ -167,7 +178,6 @@ function isValidMove(value, row, col){
             return false;
         }
     }
-
     // Asi se encuentra la esquina superior izquierda de el cuadrante
     const startRow = (Math.floor(row / 3)) * 3;
     const startCol = (Math.floor(col / 3)) * 3;
@@ -184,7 +194,31 @@ function isValidMove(value, row, col){
 }
 
 
-function solveSudoku(){}
+function solveSudoku(){
+    for(let Y = 0; Y < 9; Y++){
+        for(let X = 0; X < 9; X++){
+            if(board[Y][X] == 0){ // Buscar una celda vacía
+                for (let n = 1; n <= 9; n++){
+                    if(isValidMove(n, Y, X)){
+                        board[Y][X] = n; // Probar un número
+                        document.getElementById(Y + "-" + X).innerText = n; // Mostrar el cambio en el DOM
+
+                        if(solveSudoku()){
+                            return true;
+                        }
+
+                        // Backtracking: deshacer el movimiento
+                        board[Y][X] = 0;
+                        document.getElementById(Y + "-" + X).innerText = 0;
+                    }
+                }
+                return false; // No hay solución para esta configuración
+            }
+        }
+    }
+    return true; // Todas las celdas están llenas y válidas
+}
+
 function hint(){}
 
 
