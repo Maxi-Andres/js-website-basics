@@ -1,39 +1,15 @@
 //// Que te deje poner los numeros incluso si estan mal pero que te los ponga en rojo
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
-// ver como hacer un generador de sudoku y tenga dificultaddes
+// ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo)
 // que cuando lo temines te ponga que ganaste o algo asi
 // que con otro boton te de una pista
 // que con un boton se pueda resolver (mejorar lo de los colores y que si alguien toca solve y despues pone numeros y toca solve otravez no se resuelve)
-// que tenga un contador de tiempo 
+//// que tenga un contador de tiempo 
 
 var numSelected = null;
 var tileSelected = null;
 
 var errors = 0;
-
-// var board = [
-//     "--74916-5",
-//     "2---6-3-9",
-//     "-----7-1-",
-//     "-586----4",
-//     "--3----9-",
-//     "--62--187",
-//     "9-4-7---2",
-//     "67-83----",
-//     "81--45---",
-// ];
-
-// var solution = [
-//     "387491625",
-//     "241568379",
-//     "569327418",
-//     "758619234",
-//     "123784596",
-//     "496253187",
-//     "934176852",
-//     "675832941",
-//     "812945763",
-// ];
 
 // Los que son 0 son espacios en blanco 
 // x es horizontal, y es vertical en matematica es (x,y), en este caso abajo utilizo board[y][x]
@@ -49,29 +25,17 @@ var board = [
     [8, 1, 0, 0, 4, 5, 0, 0, 0]
 ];
 
-// var solution = [
-//     [0, 0, 7, 4, 9, 1, 6, 0, 5],
-//     [2, 0, 0, 0, 6, 0, 3, 0, 9],
-//     [0, 0, 0, 0, 0, 7, 0, 1, 0],
-//     [0, 5, 8, 6, 0, 0, 0, 0, 4],
-//     [0, 0, 3, 0, 0, 0, 0, 9, 0],
-//     [0, 0, 6, 2, 0, 0, 1, 8, 7],
-//     [9, 0, 4, 0, 7, 0, 0, 0, 2],
-//     [6, 7, 0, 8, 3, 0, 0, 0, 0],
-//     [8, 1, 0, 0, 4, 5, 0, 0, 0]
-// ];
-
-// var solution = [
-//     [3, 8, 7, 4, 9, 1, 6, 2, 5],
-//     [2, 4, 1, 5, 6, 8, 3, 7, 9],
-//     [5, 6, 9, 3, 2, 7, 4, 1, 8],
-//     [7, 5, 8, 6, 1, 9, 2, 3, 4],
-//     [1, 2, 3, 7, 8, 4, 5, 9, 6],
-//     [4, 9, 6, 2, 5, 3, 1, 8, 7],
-//     [9, 3, 4, 1, 7, 6, 8, 5, 2],
-//     [6, 7, 5, 8, 3, 2, 9, 4, 1],
-//     [8, 1, 2, 9, 4, 5, 7, 6, 3]
-// ];
+var playableBoard = [
+    [0, 0, 7, 4, 9, 1, 6, 0, 5],
+    [2, 0, 0, 0, 6, 0, 3, 0, 9],
+    [0, 0, 0, 0, 0, 7, 0, 1, 0],
+    [0, 5, 8, 6, 0, 0, 0, 0, 4],
+    [0, 0, 3, 0, 0, 0, 0, 9, 0],
+    [0, 0, 6, 2, 0, 0, 1, 8, 7],
+    [9, 0, 4, 0, 7, 0, 0, 0, 2],
+    [6, 7, 0, 8, 3, 0, 0, 0, 0],
+    [8, 1, 0, 0, 4, 5, 0, 0, 0]
+];
 
 let tiempo = 0;
 let temporizador;
@@ -193,7 +157,6 @@ function isValidMove(value, row, col){
     return true;
 }
 
-
 function solveSudoku(){
     for(let Y = 0; Y < 9; Y++){
         for(let X = 0; X < 9; X++){
@@ -202,6 +165,7 @@ function solveSudoku(){
                     if(isValidMove(n, Y, X)){
                         board[Y][X] = n; // Probar un número
                         document.getElementById(Y + "-" + X).innerText = n; // Mostrar el cambio en el DOM
+                        document.getElementById(Y + "-" + X).style.color = "#333"; // Esto es para que si la persona lo puso mal y esta en rojo lo ponga a negro ademas de poner la solucion bien
 
                         if(solveSudoku()){
                             return true;
@@ -219,8 +183,25 @@ function solveSudoku(){
     return true; // Todas las celdas están llenas y válidas
 }
 
-function hint(){}
+function hint() { //! ESTO NO ANDA
+    for (let Y = 0; Y < 9; Y++) {
+        for (let X = 0; X < 9; X++) {
+            if (board[Y][X] == 0) { // Buscar una celda vacía
+                for (let n = 1; n <= 9; n++) {
+                    if (isValidMove(n, Y, X)) {
+                        board[Y][X] = n; // Poner el número sugerido en el tablero
+                        document.getElementById(Y + "-" + X).innerText = n;
+                        document.getElementById(Y + "-" + X).style.color = "#42f57b"; // Resaltar la pista en verde
+                        return; // Solo dar una pista
+                    }
+                }
+            }
+        }
+    }
+    alert("No hay más pistas disponibles.");
+}
 
+function newGame(){}
 
 //! Esta pija no anda, fijate cuando hagaas un generador de sudoku si asi podes revisar las posiciones de otra manera
 // function checkCompletedNumber() {

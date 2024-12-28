@@ -48,7 +48,7 @@ h2{
 }
 
 #controls{
-    width: 450px; /* le doy un damaño en donde se justifica el contenido y con margin auto lo centro */
+    width: 700px; /* le doy un damaño en donde se justifica el contenido y con margin auto lo centro */
     display: flex;
     justify-content: space-evenly;
     /* align-items: center; */
