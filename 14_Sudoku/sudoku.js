@@ -7,6 +7,15 @@
 // que con otro boton te de una pista, Y QUE SEA RANDOM
 // que comprube bien si ganaste o no para que te salte la ventana
 // hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
+// que se pueda seleccionar los numeros con los numeros del teclado
+// que tengas vidas???
+// el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
+
+//! EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
+
+//! Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
+
+//tenes que hacer una funcion que lo solucione apenas empieza y otra que al tocar el boton SOLAMENTE cambien el inner html
 
 var numSelected = null;
 var tileSelected = null;
@@ -15,7 +24,34 @@ var errors = 0;
 
 // Los que son 0 son espacios en blanco 
 // x es horizontal, y es vertical en matematica es (x,y), en este caso abajo utilizo board[y][x]
+// Esta no se modifica
 var board = [
+    [0, 0, 7, 4, 9, 1, 6, 0, 5],
+    [2, 0, 0, 0, 6, 0, 3, 0, 9],
+    [0, 0, 0, 0, 0, 7, 0, 1, 0],
+    [0, 5, 8, 6, 0, 0, 0, 0, 4],
+    [0, 0, 3, 0, 0, 0, 0, 9, 0],
+    [0, 0, 6, 2, 0, 0, 1, 8, 7],
+    [9, 0, 4, 0, 7, 0, 0, 0, 2],
+    [6, 7, 0, 8, 3, 0, 0, 0, 0],
+    [8, 1, 0, 0, 4, 5, 0, 0, 0]
+];
+
+// Esta se resuelve apenas empieza el juego, se usa para las pistas, verificar si el jugador puso mal un numero y para cambiar el inner html cualdo se toca solve
+var solveBoard = [
+    [0, 0, 7, 4, 9, 1, 6, 0, 5],
+    [2, 0, 0, 0, 6, 0, 3, 0, 9],
+    [0, 0, 0, 0, 0, 7, 0, 1, 0],
+    [0, 5, 8, 6, 0, 0, 0, 0, 4],
+    [0, 0, 3, 0, 0, 0, 0, 9, 0],
+    [0, 0, 6, 2, 0, 0, 1, 8, 7],
+    [9, 0, 4, 0, 7, 0, 0, 0, 2],
+    [6, 7, 0, 8, 3, 0, 0, 0, 0],
+    [8, 1, 0, 0, 4, 5, 0, 0, 0]
+];
+
+// Aca es donde se juega
+var playableBoard = [
     [0, 0, 7, 4, 9, 1, 6, 0, 5],
     [2, 0, 0, 0, 6, 0, 3, 0, 9],
     [0, 0, 0, 0, 0, 7, 0, 1, 0],
@@ -115,9 +151,11 @@ function selectTile(){
         if(!isValidMove(numSelected.id, x, y)){
             this.style.color = "#ff6b6b" // Marca el error en rojo
             errors++;
+            playableBoard[y][x] = parseInt(numSelected.id);
             document.getElementById("errors").innerText = "Mistakes: " + errors;
         } else {
             this.style.color = "#333";
+            playableBoard[y][x] = parseInt(numSelected.id);
             checkWin();
         }
     }
@@ -185,6 +223,7 @@ function hint() { //! ESTO NO ANDA BIEN, ademas da las pista de la izquiera arri
                         board[Y][X] = n; // Poner el número sugerido en el tablero
                         document.getElementById(Y + "-" + X).innerText = n;
                         document.getElementById(Y + "-" + X).style.color = "#3079da"; // Resaltar la pista en azul
+                        document.getElementById(Y + "-" + X).classList.add("tile-start"); // esto para que el jugador no pueda cambiar la pista
                         return; // Solo dar una pista
                     }
                 }
