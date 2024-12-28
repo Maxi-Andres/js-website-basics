@@ -1,10 +1,12 @@
 //// Que te deje poner los numeros incluso si estan mal pero que te los ponga en rojo
+//// que con un boton se pueda resolver (mejorar lo de los colores)
+//// que cuando lo temines te ponga que ganaste o algo asi
+//// que tenga un contador de tiempo 
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
 // ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo)
-// que cuando lo temines te ponga que ganaste o algo asi
-// que con otro boton te de una pista
-// que con un boton se pueda resolver (mejorar lo de los colores y que si alguien toca solve y despues pone numeros y toca solve otravez no se resuelve)
-//// que tenga un contador de tiempo 
+// que con otro boton te de una pista, Y QUE SEA RANDOM
+// que comprube bien si ganaste o no para que te salte la ventana
+// hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
 
 var numSelected = null;
 var tileSelected = null;
@@ -25,17 +27,17 @@ var board = [
     [8, 1, 0, 0, 4, 5, 0, 0, 0]
 ];
 
-var playableBoard = [
-    [0, 0, 7, 4, 9, 1, 6, 0, 5],
-    [2, 0, 0, 0, 6, 0, 3, 0, 9],
-    [0, 0, 0, 0, 0, 7, 0, 1, 0],
-    [0, 5, 8, 6, 0, 0, 0, 0, 4],
-    [0, 0, 3, 0, 0, 0, 0, 9, 0],
-    [0, 0, 6, 2, 0, 0, 1, 8, 7],
-    [9, 0, 4, 0, 7, 0, 0, 0, 2],
-    [6, 7, 0, 8, 3, 0, 0, 0, 0],
-    [8, 1, 0, 0, 4, 5, 0, 0, 0]
-];
+// var solution = [
+//     "387491625",
+//     "241568379",
+//     "569327418",
+//     "758619234",
+//     "123784596",
+//     "496253187",
+//     "934176852",
+//     "675832941",
+//     "812945763",
+// ];
 
 let tiempo = 0;
 let temporizador;
@@ -116,17 +118,8 @@ function selectTile(){
             document.getElementById("errors").innerText = "Mistakes: " + errors;
         } else {
             this.style.color = "#333";
+            checkWin();
         }
-
-        // //! Esto es lo que se fija si pone el numero rojo o no
-        // if(solution[x][y] != numSelected.id){
-        //     this.style.color = "#ff6b6b" // Marca el error en rojo
-        //     errors++;
-        //     document.getElementById("errors").innerText = "Mistakes: " + errors;
-        // } else {
-        //     this.style.color = "#333"; // Esto tiene que estar aca, asi cuando corrije el error cambia de color
-        //     checkCompletedNumber();
-        // }
     }
 }
 
@@ -183,7 +176,7 @@ function solveSudoku(){
     return true; // Todas las celdas están llenas y válidas
 }
 
-function hint() { //! ESTO NO ANDA
+function hint() { //! ESTO NO ANDA BIEN, ademas da las pista de la izquiera arriba hacia abajo a la derecha hace que sea random
     for (let Y = 0; Y < 9; Y++) {
         for (let X = 0; X < 9; X++) {
             if (board[Y][X] == 0) { // Buscar una celda vacía
@@ -191,7 +184,7 @@ function hint() { //! ESTO NO ANDA
                     if (isValidMove(n, Y, X)) {
                         board[Y][X] = n; // Poner el número sugerido en el tablero
                         document.getElementById(Y + "-" + X).innerText = n;
-                        document.getElementById(Y + "-" + X).style.color = "#42f57b"; // Resaltar la pista en verde
+                        document.getElementById(Y + "-" + X).style.color = "#3079da"; // Resaltar la pista en azul
                         return; // Solo dar una pista
                     }
                 }
@@ -203,27 +196,27 @@ function hint() { //! ESTO NO ANDA
 
 function newGame(){}
 
-//! Esta pija no anda, fijate cuando hagaas un generador de sudoku si asi podes revisar las posiciones de otra manera
-// function checkCompletedNumber() {
-//     for (let num = 1; num <= 9; num++) { // Itera sobre los números del 1 al 9
-//         let count = 0; // Contador para el número actual
-//         for (let fila = 0; fila < 9; fila++) {
-//             for (let col = 0; col < 9; col++) {
-//                 const tile = document.getElementById(`${fila}-${col}`);
-//                 if (tile.innerText === num.toString() && tile.style.color != "#ff6b6b") {
-//                     count++; // Cuenta cuántas veces aparece el número en el tablero
-//                 }
-//             }
-//         }
 
-//         // Si se encuentra 9 veces en el tablero, considera el número completado
-//         if (count === 9) {
-//             const number = document.getElementById(num.toString());
-//             if (!number.classList.contains("number-completed")) {
-//                 number.classList.add("number-completed"); // Marca como completado
-//                 number.removeEventListener("click", selectNumber); // Desactiva selección
-//                 availableNums--; // Reduce el número de disponibles
-//             }
-//         }
-//     }
-// }
+//===========================================================================================================================
+// VENTANA EMERGENTE AL GANAR
+
+function checkWin() {
+    let isSolved = false; //! Suponemos que el Sudoku esta resuelto....
+
+    if (isSolved) {
+        showWinMessage();
+    }
+}
+
+function showWinMessage() {
+    const winMessage = document.getElementById('winMessage');
+    winMessage.style.visibility = 'visible';  // Muestra la ventana emergente
+}
+
+function closeWinMessage() {
+    const winMessage = document.getElementById('winMessage');
+    winMessage.style.visibility = 'hidden';  // Oculta la ventana emergente
+}
+
+//===========================================================================================================================
+
