@@ -24,7 +24,7 @@ var errors = 0;
 
 // Los que son 0 son espacios en blanco 
 // x es horizontal, y es vertical en matematica es (x,y), en este caso abajo utilizo board[y][x]
-// Esta no se modifica
+// Esta no se modifica y se usa para cargar los elementos al principio del juego
 var board = [
     [0, 0, 7, 4, 9, 1, 6, 0, 5],
     [2, 0, 0, 0, 6, 0, 3, 0, 9],
@@ -37,7 +37,7 @@ var board = [
     [8, 1, 0, 0, 4, 5, 0, 0, 0]
 ];
 
-// Esta se resuelve apenas empieza el juego, se usa para las pistas, verificar si el jugador puso mal un numero y para cambiar el inner html cualdo se toca solve
+// Esta se resuelve apenas empieza el juego, se usa para las pistas, verificar si el jugador puso mal un numero y para cambiar el inner html cualdo se toca solve, tiene que ser igual que board
 var solveBoard = [
     [0, 0, 7, 4, 9, 1, 6, 0, 5],
     [2, 0, 0, 0, 6, 0, 3, 0, 9],
@@ -50,7 +50,7 @@ var solveBoard = [
     [8, 1, 0, 0, 4, 5, 0, 0, 0]
 ];
 
-// Aca es donde se juega
+// Aca es donde se juega y donde se actualiza el html "lo que se ve"
 var playableBoard = [
     [0, 0, 7, 4, 9, 1, 6, 0, 5],
     [2, 0, 0, 0, 6, 0, 3, 0, 9],
@@ -81,6 +81,7 @@ let temporizador;
 window.onload = function(){
     setGame();
     iniciarTemporizador();
+    solveSudoku();
 }
 
 function iniciarTemporizador() {
@@ -164,12 +165,12 @@ function selectTile(){
 function isValidMove(value, row, col){
     // board[y][x]
     for(let c = 0; c < 9 ; c++){
-        if (board[row][c] == value){ // recorro las columnas
+        if (solveBoard[row][c] == value){ // recorro las columnas
             return false;
         }
     }
     for(let r = 0; r < 9 ; r++){
-        if (board[r][col] == value){ // recorro las filas
+        if (solveBoard[r][col] == value){ // recorro las filas
             return false;
         }
     }
@@ -179,7 +180,7 @@ function isValidMove(value, row, col){
 
     for (let r = startRow; r < startRow + 3; r++) {
         for (let c = startCol; c < startCol + 3; c++) {
-            if (board[r][c] == value) {
+            if (solveBoard[r][c] == value) {
                 return false; // Número ya presente en el cuadrante
             }
         }
@@ -191,20 +192,17 @@ function isValidMove(value, row, col){
 function solveSudoku(){
     for(let Y = 0; Y < 9; Y++){
         for(let X = 0; X < 9; X++){
-            if(board[Y][X] == 0){ // Buscar una celda vacía
+            if(solveBoard[Y][X] == 0){ // Buscar una celda vacía
                 for (let n = 1; n <= 9; n++){
                     if(isValidMove(n, Y, X)){
-                        board[Y][X] = n; // Probar un número
-                        document.getElementById(Y + "-" + X).innerText = n; // Mostrar el cambio en el DOM
-                        document.getElementById(Y + "-" + X).style.color = "#333"; // Esto es para que si la persona lo puso mal y esta en rojo lo ponga a negro ademas de poner la solucion bien
+                        solveBoard[Y][X] = n; // Probar un número
 
                         if(solveSudoku()){
                             return true;
                         }
 
                         // Backtracking: deshacer el movimiento
-                        board[Y][X] = 0;
-                        document.getElementById(Y + "-" + X).innerText = 0;
+                        solveBoard[Y][X] = 0;
                     }
                 }
                 return false; // No hay solución para esta configuración
@@ -213,6 +211,35 @@ function solveSudoku(){
     }
     return true; // Todas las celdas están llenas y válidas
 }
+
+function solveSudokuButton(){}
+
+// for(let Y = 0; Y < 9; Y++){
+//     for(let X = 0; X < 9; X++){
+//         if(board[Y][X] == 0){ // Buscar una celda vacía
+//             for (let n = 1; n <= 9; n++){
+//                 if(isValidMove(n, Y, X)){
+//                     board[Y][X] = n; // Probar un número
+//                     document.getElementById(Y + "-" + X).innerText = n; // Mostrar el cambio en el DOM
+//                     document.getElementById(Y + "-" + X).style.color = "#333"; // Esto es para que si la persona lo puso mal y esta en rojo lo ponga a negro ademas de poner la solucion bien
+
+//                     if(solveSudoku()){
+//                         return true;
+//                     }
+
+//                     // Backtracking: deshacer el movimiento
+//                     board[Y][X] = 0;
+//                     document.getElementById(Y + "-" + X).innerText = 0;
+//                 }
+//             }
+//             return false; // No hay solución para esta configuración
+//         }
+//     }
+// }
+// return true; // Todas las celdas están llenas y válidas
+
+
+
 
 function hint() { //! ESTO NO ANDA BIEN, ademas da las pista de la izquiera arriba hacia abajo a la derecha hace que sea random
     for (let Y = 0; Y < 9; Y++) {
