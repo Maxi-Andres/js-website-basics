@@ -107,21 +107,21 @@ function setGame(){
     }
 
     // Board 9x9
-    for(let j = 0; j < 9 ; j++){
-        for(let t = 0; t < 9 ; t++){
+    for(let r = 0; r < 9 ; r++){
+        for(let c = 0; c < 9 ; c++){
             // <div id="0-0" class="tile"></div>
             // <div id="0-1" class="tile"> (Esta parte puede ser un numero del 1 al 9) </div>
             let tile = document.createElement("div");
-            tile.id = j.toString() + "-" + t.toString(); // las id son "0-0", "0-1" ... 
-            if (board[j][t] != 0) {
-                tile.innerText = board[j][t];
+            tile.id = r.toString() + "-" + c.toString(); // las id son "0-0", "0-1" ... 
+            if (board[r][c] != 0) {
+                tile.innerText = board[r][c];
                 tile.classList.add("tile-start");
             }
-            // tile.innerText = board[j][t] != "-" ? (tile.classList.add("tile-start"), board[j][t]) : ""; // esto es como lo de arriba pero mas pro
-            if(j == 2 || j == 5){
+            // tile.innerText = board[r][c] != "-" ? (tile.classList.add("tile-start"), board[r][c]) : ""; // esto es como lo de arriba pero mas pro
+            if(r == 2 || r == 5){
                 tile.classList.add("horizontal-line");
             }
-            if(t == 2 || t == 5){
+            if(c == 2 || c == 5){
                 tile.classList.add("vertical-line");
             }
             tile.addEventListener("click", selectTile);
@@ -140,23 +140,21 @@ function selectNumber(){
 }
 
 function selectTile(){
-    if(numSelected && !this.classList.contains("tile-start")){ // && this.innerText == "" asi solo se puede poner una vez sola un numero en un tile
+    if(numSelected && !this.classList.contains("tile-start") && !this.classList.contains("tile-hint")){
 
         let cords = this.id.split("-");
-        let x = parseInt(cords[0]); // fila 
-        let y = parseInt(cords[1]); // columnda
+        let y = parseInt(cords[0]); // fila 
+        let x = parseInt(cords[1]); // columnda
 
         this.innerText = numSelected.id;
+        playableBoard[y][x] = parseInt(numSelected.id);
 
-        // Verifica segun las reglas de Sudoku (fila, columna, y cuadrante) 
-        if(!isValidMove(numSelected.id, x, y)){
+        if(playableBoard[y][x] !== solveBoard[y][x]){ // siempre da 0
             this.style.color = "#ff6b6b" // Marca el error en rojo
             errors++;
-            playableBoard[y][x] = parseInt(numSelected.id);
             document.getElementById("errors").innerText = "Mistakes: " + errors;
         } else {
             this.style.color = "#333";
-            playableBoard[y][x] = parseInt(numSelected.id);
             checkWin();
         }
     }
@@ -241,23 +239,40 @@ function solveSudokuButton(){}
 
 
 
-function hint() { //! ESTO NO ANDA BIEN, ademas da las pista de la izquiera arriba hacia abajo a la derecha hace que sea random
-    for (let Y = 0; Y < 9; Y++) {
-        for (let X = 0; X < 9; X++) {
-            if (board[Y][X] == 0) { // Buscar una celda vacía
-                for (let n = 1; n <= 9; n++) {
-                    if (isValidMove(n, Y, X)) {
-                        board[Y][X] = n; // Poner el número sugerido en el tablero
-                        document.getElementById(Y + "-" + X).innerText = n;
-                        document.getElementById(Y + "-" + X).style.color = "#3079da"; // Resaltar la pista en azul
-                        document.getElementById(Y + "-" + X).classList.add("tile-start"); // esto para que el jugador no pueda cambiar la pista
-                        return; // Solo dar una pista
-                    }
-                }
+function hint() { 
+    // Número aleatorio entre dos valores (Min y Max, inclusive)
+    // let min = 0;
+    // let max = 9;
+    // const randomRow = Math.floor(Math.random() * (max - min + 1)) + min;
+    // const randomCol = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    // Recopilar todas las posiciones disponibles donde haya un 0
+    let availablePositions = [];
+    for (let row = 0; row < playableBoard.length; row++) { //! si queres que las pistas sobreescriban lo que pone el jugador lo que se puede hacer es que no compare con playableBoard sino con board
+        for (let col = 0; col < playableBoard[row].length; col++) {
+            if (playableBoard[row][col] === 0) {
+                availablePositions.push([row, col]);
             }
         }
     }
-    alert("No hay más pistas disponibles.");
+
+    // console.log("Available Positions:", availablePositions); // como no es una variable clobal no la podes ver si tocas F12, pero availablePositions es en cada index la posicion por ejemplo [0, 0], [0, 1], [0, 7], [1, 1], [1, 2]
+
+    // Si no hay posiciones disponibles, mostrar alerta y salir
+    if (availablePositions.length === 0) {
+        alert("No hay más pistas disponibles.");
+        return;
+    }
+
+    // Elegir una posición aleatoria de las disponibles
+    const randomIndex = Math.floor(Math.random() * availablePositions.length);
+    const [randomRow, randomCol] = availablePositions[randomIndex];
+
+    // Asignar la pista al tablero y actualizar la interfaz
+    playableBoard[randomRow][randomCol] = solveBoard[randomRow][randomCol];
+    const cell = document.getElementById(randomRow + "-" + randomCol);
+    cell.innerText = solveBoard[randomRow][randomCol];
+    cell.classList.add("tile-hint"); // Evitar que el jugador cambie la pista
 }
 
 function newGame(){}

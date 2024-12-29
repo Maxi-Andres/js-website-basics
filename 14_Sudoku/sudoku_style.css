@@ -150,7 +150,9 @@ span{
     visibility: hidden; /* no lo muestra pero sigue ocupando espacio */
 }
 
-
+.tile-hint{
+    color: #3079da;
+}
 
 
 
