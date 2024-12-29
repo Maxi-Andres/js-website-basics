@@ -2,20 +2,19 @@
 //// que con un boton se pueda resolver (mejorar lo de los colores)
 //// que cuando lo temines te ponga que ganaste o algo asi
 //// que tenga un contador de tiempo 
+//// que con otro boton te de una pista, Y QUE SEA RANDOM
+//// hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
 // ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo)
-// que con otro boton te de una pista, Y QUE SEA RANDOM
 // que comprube bien si ganaste o no para que te salte la ventana
-// hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
 // que se pueda seleccionar los numeros con los numeros del teclado
 // que tengas vidas???
 // el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
 
-//! EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
+//? EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
+//? Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
 
-//! Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
-
-//tenes que hacer una funcion que lo solucione apenas empieza y otra que al tocar el boton SOLAMENTE cambien el inner html
+//! tenes que hacer una funcion que lo solucione apenas empieza y otra que al tocar el boton SOLAMENTE cambien el inner html
 
 var numSelected = null;
 var tileSelected = null;
