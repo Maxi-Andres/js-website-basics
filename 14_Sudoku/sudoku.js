@@ -4,12 +4,11 @@
 //// que tenga un contador de tiempo 
 //// que con otro boton te de una pista, Y QUE SEA RANDOM
 //// hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
+//// que comprube bien si ganaste o no para que te salte la ventana
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
-// ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo)
-// que comprube bien si ganaste o no para que te salte la ventana
+// ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo) y que tenga cache??
 // que se pueda seleccionar los numeros con los numeros del teclado
 // que tengas vidas???
-//
 //// el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
 //// EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
 //// Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
@@ -19,6 +18,7 @@ var numSelected = null;
 var tileSelected = null;
 
 var errors = 0;
+var emptyTiles = 0;
 
 // Los que son 0 son espacios en blanco 
 // x es horizontal, y es vertical en matematica es (x,y), en este caso abajo utilizo board[y][x]
@@ -80,6 +80,7 @@ window.onload = function(){
     setGame();
     iniciarTemporizador();
     solveSudoku();
+    tilesToPlace();
 }
 
 function iniciarTemporizador() {
@@ -153,7 +154,10 @@ function selectTile(){
             document.getElementById("errors").innerText = "Mistakes: " + errors;
         } else {
             this.style.color = "#333";
-            checkWin();
+            emptyTiles--;
+            if(emptyTiles == 0){
+                checkWin();
+            }
         }
     }
 }
@@ -254,6 +258,17 @@ function hint() {
     const cell = document.getElementById(randomRow + "-" + randomCol);
     cell.innerText = solveBoard[randomRow][randomCol];
     cell.classList.add("tile-hint"); // Evitar que el jugador cambie la pista
+    emptyTiles--;
+}
+
+function tilesToPlace(){
+    for(let Y = 0; Y < 9; Y++){
+        for(let X = 0; X < 9; X++){
+            if(board[Y][X] == 0){ // Buscar una celda vacía
+                emptyTiles++;
+            }
+        }
+    }
 }
 
 function newGame(){}
@@ -263,19 +278,19 @@ function newGame(){}
 // VENTANA EMERGENTE AL GANAR
 
 function checkWin() {
-    let isSolved = false; //! Suponemos que el Sudoku esta resuelto....
+    let isSolved = true; //! Suponemos que el Sudoku esta resuelto....
 
-    if (isSolved) {
+    if(isSolved){
         showWinMessage();
     }
 }
 
-function showWinMessage() {
+function showWinMessage(){
     const winMessage = document.getElementById('winMessage');
     winMessage.style.visibility = 'visible';  // Muestra la ventana emergente
 }
 
-function closeWinMessage() {
+function closeWinMessage(){
     const winMessage = document.getElementById('winMessage');
     winMessage.style.visibility = 'hidden';  // Oculta la ventana emergente
 }
