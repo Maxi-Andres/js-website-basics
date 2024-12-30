@@ -5,10 +5,11 @@
 //// que con otro boton te de una pista, Y QUE SEA RANDOM
 //// hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
 //// que comprube bien si ganaste o no para que te salte la ventana
+//// que se pueda seleccionar los numeros con los numeros del teclado
 // que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
 // ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo) y que tenga cache??
-// que se pueda seleccionar los numeros con los numeros del teclado
 // que tengas vidas???
+// que tambien salte una ventana para las hints y para un new game
 //// el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
 //// EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
 //// Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
@@ -81,6 +82,7 @@ window.onload = function(){
     iniciarTemporizador();
     solveSudoku();
     tilesToPlace();
+    keysConfig();
 }
 
 function iniciarTemporizador() {
@@ -130,6 +132,21 @@ function setGame(){
     }
 }
 
+function keysConfig(){
+    document.addEventListener('keydown', function(event) {
+        // Obtengo el caracter presionado
+        const key = event.key;
+
+        if (key >= "1" && key <= "9") {
+            // Encuentra el numero
+            const number = document.getElementById(`${key}`); //no hace falta $`{}` pero lo dejo para que te acuerdes
+            if (number) {
+                number.click(); // Simula un clic en el "boton"
+            }
+        }
+    });
+}
+
 function selectNumber(){
     if(numSelected != null){
         numSelected.classList.remove("number-selected");
@@ -156,7 +173,7 @@ function selectTile(){
             this.style.color = "#333";
             emptyTiles--;
             if(emptyTiles == 0){
-                checkWin();
+                showWinMessage();
             }
         }
     }
@@ -276,14 +293,6 @@ function newGame(){}
 
 //===========================================================================================================================
 // VENTANA EMERGENTE AL GANAR
-
-function checkWin() {
-    let isSolved = true; //! Suponemos que el Sudoku esta resuelto....
-
-    if(isSolved){
-        showWinMessage();
-    }
-}
 
 function showWinMessage(){
     const winMessage = document.getElementById('winMessage');
