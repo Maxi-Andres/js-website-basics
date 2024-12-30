@@ -9,12 +9,11 @@
 // que comprube bien si ganaste o no para que te salte la ventana
 // que se pueda seleccionar los numeros con los numeros del teclado
 // que tengas vidas???
-// el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
-
-//? EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
-//? Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
-
-//! tenes que hacer una funcion que lo solucione apenas empieza y otra que al tocar el boton SOLAMENTE cambien el inner html
+//
+//// el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
+//// EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
+//// Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
+//// tenes que hacer una funcion que lo solucione apenas empieza y otra que al tocar el boton SOLAMENTE cambien el inner html
 
 var numSelected = null;
 var tileSelected = null;
@@ -209,34 +208,17 @@ function solveSudoku(){
     return true; // Todas las celdas están llenas y válidas
 }
 
-function solveSudokuButton(){}
-
-// for(let Y = 0; Y < 9; Y++){
-//     for(let X = 0; X < 9; X++){
-//         if(board[Y][X] == 0){ // Buscar una celda vacía
-//             for (let n = 1; n <= 9; n++){
-//                 if(isValidMove(n, Y, X)){
-//                     board[Y][X] = n; // Probar un número
-//                     document.getElementById(Y + "-" + X).innerText = n; // Mostrar el cambio en el DOM
-//                     document.getElementById(Y + "-" + X).style.color = "#333"; // Esto es para que si la persona lo puso mal y esta en rojo lo ponga a negro ademas de poner la solucion bien
-
-//                     if(solveSudoku()){
-//                         return true;
-//                     }
-
-//                     // Backtracking: deshacer el movimiento
-//                     board[Y][X] = 0;
-//                     document.getElementById(Y + "-" + X).innerText = 0;
-//                 }
-//             }
-//             return false; // No hay solución para esta configuración
-//         }
-//     }
-// }
-// return true; // Todas las celdas están llenas y válidas
-
-
-
+function solveSudokuButton(){
+    for(let Y = 0; Y < 9; Y++){
+        for(let X = 0; X < 9; X++){
+            if(board[Y][X] == 0){ // Buscar una celda vacía
+                playableBoard[Y][X] = solveBoard[Y][X];
+                document.getElementById(Y + "-" + X).innerText = solveBoard[Y][X]; // Mostrar el cambio en el DOM
+                document.getElementById(Y + "-" + X).style.color = "#333"; // Esto es para que si la persona lo puso mal y esta en rojo lo ponga a negro ademas de poner la solucion bien
+            }
+        }
+    }
+}
 
 function hint() { 
     // Número aleatorio entre dos valores (Min y Max, inclusive)
@@ -247,7 +229,7 @@ function hint() {
 
     // Recopilar todas las posiciones disponibles donde haya un 0
     let availablePositions = [];
-    for (let row = 0; row < playableBoard.length; row++) { //! si queres que las pistas sobreescriban lo que pone el jugador lo que se puede hacer es que no compare con playableBoard sino con board
+    for (let row = 0; row < playableBoard.length; row++) { //! si queres que las pistas sobreescriban lo que pone el jugador lo que se puede hacer es que no compare con playableBoard sino con board tambien tendiras que ver si lo puso mal porque no vas a sobreescribir algo si lo puso bien
         for (let col = 0; col < playableBoard[row].length; col++) {
             if (playableBoard[row][col] === 0) {
                 availablePositions.push([row, col]);
