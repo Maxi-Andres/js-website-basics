@@ -10,6 +10,7 @@
 // ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo) y que tenga cache??
 // que tengas vidas???
 // que tambien salte una ventana para las hints y para un new game
+// Hostearlo con github.io???
 //// el problema es que cuando tocas solve se modifica la board y se llena, la funcion solveSudoku se fija las celdas que tienen un 0 por eso cuando tocas solve no te deja mas, nose si se podria usar dos tablas una para llenar el tablero al inicio, y para comprobar como resolverlo y otra en la que se resuelva y en la que pueda jugar el jugador
 //// EL PROBLEMA CON SOLVE Y HINT ES QUE ACTUALIZAN LA BOARD Y CUANDO JUEGA EL JUGADOR NO, esto igual tiene queser asi porque si el jugador actualiza la tabla y pone algo mal despues solve no va a funcionar por eso se necesitan 2 tablas si o si
 //// Quiza lo que se puede hacer es que apenas se inicia el juego se resuelve el sudoku y se guarda en un tablay de ahi se toman las pistas ademas de si esta mal colocado el numero para que se ponga en rojo SI HACE ESTO
@@ -19,7 +20,7 @@ var numSelected = null;
 var tileSelected = null;
 
 var errors = 0;
-var emptyTiles = 0;
+var emptyTiles = 0; // Lo hago global asi lo pueden acceder distintas funciones
 
 // Los que son 0 son espacios en blanco 
 // x es horizontal, y es vertical en matematica es (x,y), en este caso abajo utilizo board[y][x]
