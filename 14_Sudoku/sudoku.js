@@ -6,7 +6,7 @@
 //// hay un error cuando pone los numeros en rojos porque los comprueba de manera logica y algunos se pueden poner ahi como en este ejemplo: (image.png)
 //// que comprube bien si ganaste o no para que te salte la ventana
 //// que se pueda seleccionar los numeros con los numeros del teclado
-// que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa
+// que cuando pongas todos los 1 por ejemplo desaparesca la opcion esa, esto nose si me gusta
 // ver como hacer un generador de sudoku y tenga dificultaddes (y que te haga un juego nuevo) y que tenga cache??
 // que tengas vidas???
 // que tambien salte una ventana para las hints y para un new game
@@ -26,54 +26,53 @@ var emptyTiles = 0; // Lo hago global asi lo pueden acceder distintas funciones
 // x es horizontal, y es vertical en matematica es (x,y), en este caso abajo utilizo board[y][x]
 // Esta no se modifica y se usa para cargar los elementos al principio del juego
 var board = [
-    [0, 0, 7, 4, 9, 1, 6, 0, 5],
-    [2, 0, 0, 0, 6, 0, 3, 0, 9],
-    [0, 0, 0, 0, 0, 7, 0, 1, 0],
-    [0, 5, 8, 6, 0, 0, 0, 0, 4],
-    [0, 0, 3, 0, 0, 0, 0, 9, 0],
-    [0, 0, 6, 2, 0, 0, 1, 8, 7],
-    [9, 0, 4, 0, 7, 0, 0, 0, 2],
-    [6, 7, 0, 8, 3, 0, 0, 0, 0],
-    [8, 1, 0, 0, 4, 5, 0, 0, 0]
+    [0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [2, 5, 0, 1, 0, 7, 6, 0, 0],
+    [0, 0, 0, 3, 4, 0, 9, 0, 0],
+    [8, 0, 0, 4, 7, 0, 0, 0, 0],
+    [7, 2, 0, 8, 5, 0, 3, 9, 4],
+    [0, 0, 0, 0, 2, 0, 0, 1, 0],
+    [0, 7, 9, 0, 0, 5, 0, 0, 3],
+    [0, 0, 0, 7, 0, 0, 0, 0, 9],
+    [5, 0, 0, 0, 0, 9, 0, 4, 0]
 ];
+// [
+//     [0, 0, 7, 4, 9, 1, 6, 0, 5],
+//     [2, 0, 0, 0, 6, 0, 3, 0, 9],
+//     [0, 0, 0, 0, 0, 7, 0, 1, 0],
+//     [0, 5, 8, 6, 0, 0, 0, 0, 4],
+//     [0, 0, 3, 0, 0, 0, 0, 9, 0],
+//     [0, 0, 6, 2, 0, 0, 1, 8, 7],
+//     [9, 0, 4, 0, 7, 0, 0, 0, 2],
+//     [6, 7, 0, 8, 3, 0, 0, 0, 0],
+//     [8, 1, 0, 0, 4, 5, 0, 0, 0]
+// ];
 
 // Esta se resuelve apenas empieza el juego, se usa para las pistas, verificar si el jugador puso mal un numero y para cambiar el inner html cualdo se toca solve, tiene que ser igual que board
 var solveBoard = [
-    [0, 0, 7, 4, 9, 1, 6, 0, 5],
-    [2, 0, 0, 0, 6, 0, 3, 0, 9],
-    [0, 0, 0, 0, 0, 7, 0, 1, 0],
-    [0, 5, 8, 6, 0, 0, 0, 0, 4],
-    [0, 0, 3, 0, 0, 0, 0, 9, 0],
-    [0, 0, 6, 2, 0, 0, 1, 8, 7],
-    [9, 0, 4, 0, 7, 0, 0, 0, 2],
-    [6, 7, 0, 8, 3, 0, 0, 0, 0],
-    [8, 1, 0, 0, 4, 5, 0, 0, 0]
+    [0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [2, 5, 0, 1, 0, 7, 6, 0, 0],
+    [0, 0, 0, 3, 4, 0, 9, 0, 0],
+    [8, 0, 0, 4, 7, 0, 0, 0, 0],
+    [7, 2, 0, 8, 5, 0, 3, 9, 4],
+    [0, 0, 0, 0, 2, 0, 0, 1, 0],
+    [0, 7, 9, 0, 0, 5, 0, 0, 3],
+    [0, 0, 0, 7, 0, 0, 0, 0, 9],
+    [5, 0, 0, 0, 0, 9, 0, 4, 0]
 ];
 
 // Aca es donde se juega y donde se actualiza el html "lo que se ve"
 var playableBoard = [
-    [0, 0, 7, 4, 9, 1, 6, 0, 5],
-    [2, 0, 0, 0, 6, 0, 3, 0, 9],
-    [0, 0, 0, 0, 0, 7, 0, 1, 0],
-    [0, 5, 8, 6, 0, 0, 0, 0, 4],
-    [0, 0, 3, 0, 0, 0, 0, 9, 0],
-    [0, 0, 6, 2, 0, 0, 1, 8, 7],
-    [9, 0, 4, 0, 7, 0, 0, 0, 2],
-    [6, 7, 0, 8, 3, 0, 0, 0, 0],
-    [8, 1, 0, 0, 4, 5, 0, 0, 0]
+    [0, 1, 0, 0, 0, 0, 0, 0, 0],
+    [2, 5, 0, 1, 0, 7, 6, 0, 0],
+    [0, 0, 0, 3, 4, 0, 9, 0, 0],
+    [8, 0, 0, 4, 7, 0, 0, 0, 0],
+    [7, 2, 0, 8, 5, 0, 3, 9, 4],
+    [0, 0, 0, 0, 2, 0, 0, 1, 0],
+    [0, 7, 9, 0, 0, 5, 0, 0, 3],
+    [0, 0, 0, 7, 0, 0, 0, 0, 9],
+    [5, 0, 0, 0, 0, 9, 0, 4, 0]
 ];
-
-// var solution = [
-//     "387491625",
-//     "241568379",
-//     "569327418",
-//     "758619234",
-//     "123784596",
-//     "496253187",
-//     "934176852",
-//     "675832941",
-//     "812945763",
-// ];
 
 let tiempo = 0;
 let temporizador;
@@ -240,6 +239,7 @@ function solveSudokuButton(){
             }
         }
     }
+    showWinMessage();
 }
 
 function hint() { 
@@ -263,7 +263,7 @@ function hint() {
 
     // Si no hay posiciones disponibles, mostrar alerta y salir
     if (availablePositions.length === 0) {
-        alert("No hay más pistas disponibles.");
+            showHintMessage();
         return;
     }
 
@@ -277,6 +277,16 @@ function hint() {
     cell.innerText = solveBoard[randomRow][randomCol];
     cell.classList.add("tile-hint"); // Evitar que el jugador cambie la pista
     emptyTiles--;
+}
+
+function showHintMessage(){
+    const hintMessage = document.getElementById('hintMessage');
+    hintMessage.style.visibility = 'visible';  // Muestra la ventana emergente
+}
+
+function closeHintMessage(){
+    const hintMessage = document.getElementById('hintMessage');
+    hintMessage.style.visibility = 'hidden';  // Oculta la ventana emergente
 }
 
 function tilesToPlace(){
