@@ -29,20 +29,19 @@
     <div id="digits"></div>
 
     <!-- Hint window -->
-    <div id="hintMessage">
+    <div id="hintMessage" class="popup">
         <div class="message-box">
-            <h2>NO HINT</h2>
-            <p>!</p>
-            <button id="closeButton" onclick="closeHintMessage()">Close</button>
+            <h2>No more hints available.</h2>
+            <button onclick="closeHintMessage()">Close</button>
         </div>
     </div>
 
     <!-- Win window -->
-    <div id="winMessage">
+    <div id="winMessage" class="popup">
         <div class="message-box">
             <h2>Congratulations!</h2>
             <p>You've completed the Sudoku puzzle!</p>
-            <button id="closeButton" onclick="closeWinMessage()">Close</button>
+            <button onclick="closeWinMessage()">Close</button>
         </div>
     </div>
 

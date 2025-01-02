@@ -94,6 +94,19 @@ function iniciarTemporizador() {
     }, 1000);
 }
 
+function tilesToPlace(){
+    for(let Y = 0; Y < 9; Y++){
+        for(let X = 0; X < 9; X++){
+            if(board[Y][X] == 0){ // Buscar una celda vacía
+                emptyTiles++;
+            }
+        }
+    }
+}
+
+//===========================================================================================================================
+// Crear HTML
+
 function setGame(){
     // Digits 1-9
     for(let i = 1; i <= 9 ; i++){
@@ -131,6 +144,9 @@ function setGame(){
         }
     }
 }
+
+//===========================================================================================================================
+// Seleccion y configuracion
 
 function keysConfig(){
     document.addEventListener('keydown', function(event) {
@@ -178,6 +194,9 @@ function selectTile(){
         }
     }
 }
+
+//===========================================================================================================================
+// Resolver sudoku
 
 function isValidMove(value, row, col){
     // board[y][x]
@@ -242,6 +261,9 @@ function solveSudokuButton(){
     showWinMessage();
 }
 
+//===========================================================================================================================
+// Pistas
+
 function hint() { 
     // Número aleatorio entre dos valores (Min y Max, inclusive)
     // let min = 0;
@@ -289,15 +311,8 @@ function closeHintMessage(){
     hintMessage.style.visibility = 'hidden';  // Oculta la ventana emergente
 }
 
-function tilesToPlace(){
-    for(let Y = 0; Y < 9; Y++){
-        for(let X = 0; X < 9; X++){
-            if(board[Y][X] == 0){ // Buscar una celda vacía
-                emptyTiles++;
-            }
-        }
-    }
-}
+//===========================================================================================================================
+// Crear sudokus
 
 function newGame(){}
 
